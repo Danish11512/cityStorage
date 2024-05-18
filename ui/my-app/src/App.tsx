@@ -1,27 +1,23 @@
+import { useEffect, useState } from 'react';
 import './App.css'
 import MainPage from './pages/mainPage/MainPage';
-
-import GlobalContextProvider from 'components/globalContext/GlobalContext'
-import SocketProvider from 'components/socketProvider/SocketProvider';
+import {socket} from './socket'
+import { Order } from 'interfaces/Interfaces';
 
 function App() {
-  // const [data, setData] = useState<any[]>([])
+  const [rawOrders, setRawOrders] = useState<Order[]>([])
 
-  // useEffect(() => {
-  //   socket.on('order_event', (res) => setData(res))
+  useEffect(() => {
+    socket.on('order_event', (res) => setRawOrders(res))
 
-  //   return () => {
-  //     socket.off('order_event', (res) => setData(res));
-  //   };
-  // }, [socket])
+    return () => {
+      socket.off('order_event', (res) => setRawOrders(res));
+    };
+  }, [socket])
 
   return (
     <div className="App">
-      <GlobalContextProvider>
-        <SocketProvider>
-          <MainPage />
-        </SocketProvider>
-      </GlobalContextProvider>
+          <MainPage {...rawOrders}/>
     </div>
   );
 }
