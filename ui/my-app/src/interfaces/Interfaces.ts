@@ -13,13 +13,13 @@ export interface Order {
 export interface SocketProviderInterface extends PropsWithChildren {}
 
 export interface GlobalContextInterface {
-    orders: Map<string, {}> | undefined
-    setOrders: Dispatch<SetStateAction<Map<string, {}> | undefined>>
+    orders: Map<String, Order> | undefined
+    setOrders: Dispatch<SetStateAction<Map<String, Order> | undefined>>
     prices: Map<number, string[]> | undefined
     setPrices: Dispatch<SetStateAction<Map<number, string[]> | undefined>>
 }
 
-export interface GlobalContextProviderChildrenInterface {
+export interface ChildrenInterface {
     children: ReactNode
 }
 

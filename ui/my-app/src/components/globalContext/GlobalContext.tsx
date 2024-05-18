@@ -1,11 +1,16 @@
-import { GlobalContextInterface, GlobalContextProviderChildrenInterface } from "interfaces/Interfaces";
+import { GlobalContextInterface, ChildrenInterface, Order } from "interfaces/Interfaces";
 import { createContext, useState } from "react";
 
-export const GlobalContext = createContext<GlobalContextInterface | undefined>(undefined)
+export const GlobalContext = createContext<GlobalContextInterface>({
+    orders: new Map([]), 
+    setOrders: () => undefined, 
+    prices: new Map([]),
+    setPrices: () => undefined
+})
 
-const GlobalContextProvider = ({children}: GlobalContextProviderChildrenInterface): JSX.Element => {
+const GlobalContextProvider = ({children}: ChildrenInterface): JSX.Element => {
 
-    const [orders, setOrders] = useState<Map<string, {}> | undefined>(undefined)
+    const [orders, setOrders] = useState<Map<String, Order> | undefined>(undefined)
     const [prices, setPrices] = useState<Map<number, string[]> | undefined>(undefined)
     return (
         <GlobalContext.Provider
