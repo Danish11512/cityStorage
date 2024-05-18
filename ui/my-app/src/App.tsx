@@ -1,15 +1,14 @@
-import { ErrorBoundary } from 'react-error-boundary';
 import './App.css'
-import GlobalError from './components/globalError/GlobalError';
 import MainPage from './pages/mainPage/MainPage';
-import { io } from 'socket.io-client';
-import { SOCKET_URL } from 'utils/Config';
-import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client'
+import { SOCKET_URL } from 'utils/Config'
+import { useEffect, useState } from 'react'
+import GlobalContextProvider from 'components/globalContext/GlobalContext'
 
 const socket = io(SOCKET_URL)
 
 function App() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any[]>([])
 
   useEffect(() => {
     socket.on('order_event', (res) => setData(res))
@@ -21,10 +20,9 @@ function App() {
 
   return (
     <div className="App">
-      <ErrorBoundary FallbackComponent={GlobalError}>
-        <div>{data.length}</div>
-
-      </ErrorBoundary>
+      <GlobalContextProvider>
+        <></>
+      </GlobalContextProvider>
     </div>
   );
 }
