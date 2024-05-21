@@ -1,24 +1,24 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import './App.css'
 import { SocketContext } from 'components/socketContext/SocketContext'
+import { DataContext } from 'components/dataContext/DataContext'
 
 function App() {
   const socket = useContext(SocketContext)
-  const [orders, setOrders] = useState([])
+  const {orderData, priceData, currentIndex, updateOrders} = useContext(DataContext)
 
   useEffect(() => {
-    socket.on('order_event', (data) => {setOrders(data)})
+    socket.on('order_event', (data) => {updateOrders(data)})
 
     return () => {
-      socket.off('order_event', (data) => {setOrders(data)})
+      socket.off('order_event', (data) => {updateOrders(data)})
     }
-  }, [socket])
+  }, [socket, updateOrders])
 
 
   return (
     <div>
-      {orders.map(i => 
-        <p>{i.customer}</p>)}
+      {currentIndex}
     </div>
   )
 }
