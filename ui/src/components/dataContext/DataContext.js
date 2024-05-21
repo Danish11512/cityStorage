@@ -4,11 +4,11 @@ import { orderReducer } from "utils/functions"
 export const DataContext = createContext(null)
 
 const initialData = {
-    buffer: new Array(20000).fill(null), // Pre-fill the buffer array
-    map: new Map(),  // Price to indices map
+    orderBuffer: new Array(20000).fill(null), // Pre-fill the buffer array
+    priceMap: new Map(),  // Price to indices map
     idMap: new Map(),  // ID to index map
     currentIndex: 0,
-    maxSize: 1000
+    size: 1000
 }
 
 const DataContextProvider = ({children}) => {

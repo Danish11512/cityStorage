@@ -1,58 +1,36 @@
-export const orderReducer = (state, newDataArray) => {
-    let { buffer, map, idMap, currentIndex, maxSize } = state;
+export const orderReducer = (state, newOrders) => {
+    let { orderBuffer, priceMap, idMap, currentIndex, size } = state
     
-    newDataArray.forEach(item => {
-        const { price, id } = item;
+    newOrders.forEach(item => {
+        const { price, id } = item
 
-        // Check if the item already exists using its ID
         if (idMap.has(id)) {
-            // Item exists, find its index and update the buffer and map
-            const existingIndex = idMap.get(id);
-            const oldPrice = buffer[existingIndex].price;
-            buffer[existingIndex] = item;
+            orderBuffer[idMap.get(id)] = item
+            
+        } else {            
+            if (orderBuffer[currentIndex]) {
+                const oldOrder = orderBuffer[currentIndex]
+                idMap.delete(oldOrder.id)
+                const oldPriceSet = priceMap.get(oldOrder.price)
+                oldPriceSet.delete(currentIndex)
 
-            // Update the map for price if it changed
-            if (oldPrice !== price) {
-                if (map.has(oldPrice)) {
-                    const oldPriceIndices = map.get(oldPrice);
-                    oldPriceIndices.delete(existingIndex);
-                    if (oldPriceIndices.size === 0) {
-                        map.delete(oldPrice);
-                    }
-                }
-
-                if (!map.has(price)) {
-                    map.set(price, new Set());
-                }
-                map.get(price).add(existingIndex);
-            }
-        } else {
-            // New item or buffer overwrite
-            const oldItem = buffer[currentIndex];
-            if (oldItem) {
-                // Remove old item from maps
-                idMap.delete(oldItem.id);
-                if (map.has(oldItem.price)) {
-                    const oldPriceIndices = map.get(oldItem.price);
-                    oldPriceIndices.delete(currentIndex);
-                    if (oldPriceIndices.size === 0) {
-                        map.delete(oldItem.price);
-                    }
+                if (oldPriceSet.size === 0) {
+                    priceMap.delete(oldOrder.price)
                 }
             }
 
-            // Insert the new item in the buffer
-            buffer[currentIndex] = item;
-            idMap.set(id, currentIndex);
-            if (!map.has(price)) {
-                map.set(price, new Set());
-            }
-            map.get(price).add(currentIndex);
+            orderBuffer[currentIndex] = item
+            idMap.set(id, currentIndex)
 
-            // Increment the index for the next insert
-            currentIndex = (currentIndex + 1) % maxSize;
+            if (!priceMap.has(price)) {
+                priceMap.set(price, new Set())
+            }
+
+            priceMap.get(price).add(currentIndex)
+            console.log(priceMap)
+            currentIndex = (currentIndex + 1) % size
         }
-    });
+    })
 
-    return { buffer, map, idMap, currentIndex, maxSize };
-};
+    return { orderBuffer, priceMap, idMap, currentIndex, size }
+}
