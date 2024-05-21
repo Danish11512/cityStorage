@@ -1,5 +1,5 @@
 import { createContext, useEffect } from "react"
-import { SOCKETURL } from '../utils/constants' 
+import { SOCKETURL } from 'utils/constants' 
 import io from 'socket.io-client'
 
 export const SocketContext = createContext(null)

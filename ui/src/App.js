@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import './App.css';
-import { SocketContext } from './socketContext/SocketContext';
+import { useContext, useEffect, useState } from 'react'
+import './App.css'
+import { SocketContext } from 'components/socketContext/SocketContext'
 
 function App() {
   const socket = useContext(SocketContext)
