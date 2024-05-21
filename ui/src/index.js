@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SocketContextProvider from './components/socketContext/SocketContext';
+import DataContextProvider from 'components/dataContext/DataContext';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SocketContextProvider>
+      <DataContextProvider>
+        <App />
+      </DataContextProvider>
+    </SocketContextProvider>
   </React.StrictMode>
 );
 

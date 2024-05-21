@@ -1,0 +1,1 @@
+export const SOCKETURL = 'http://localhost:4000'
