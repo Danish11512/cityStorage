@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import { useContext, useEffect, useState } from 'react';
 import './App.css';
+import { SocketContext } from './socketContext/SocketContext';
 
 function App() {
+  const socket = useContext(SocketContext)
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    socket.on('order_event', (data) => {setOrders(data)})
+
+    return () => {
+      socket.off('order_event', (data) => {setOrders(data)})
+    }
+  }, [socket])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {orders.map(i => 
+        <p>{i.customer}</p>)}
     </div>
-  );
+  )
 }
 
 export default App;
