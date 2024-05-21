@@ -4,10 +4,11 @@ import { orderReducer } from "utils/functions"
 export const DataContext = createContext(null)
 
 const initialData = {
-    orderBuffer: new Array(20000),
-    priceMap: new Map(),
+    buffer: new Array(20000).fill(null), // Pre-fill the buffer array
+    map: new Map(),  // Price to indices map
+    idMap: new Map(),  // ID to index map
     currentIndex: 0,
-    size: 1000
+    maxSize: 1000
 }
 
 const DataContextProvider = ({children}) => {
@@ -15,7 +16,7 @@ const DataContextProvider = ({children}) => {
 
 
     return (
-        <DataContext.Provider value={{orderData: orders.orderBuffer, priceData: orders.priceMap, currentIndex: orders.currentIndex, updateOrders}}>
+        <DataContext.Provider value={{orders, updateOrders}}>
             {children}
         </DataContext.Provider>
     )

@@ -5,7 +5,7 @@ import { DataContext } from 'components/dataContext/DataContext'
 
 function App() {
   const socket = useContext(SocketContext)
-  const {orderData, priceData, currentIndex, updateOrders} = useContext(DataContext)
+  const {orders, updateOrders} = useContext(DataContext)
 
   useEffect(() => {
     socket.on('order_event', (data) => {updateOrders(data)})
@@ -18,8 +18,14 @@ function App() {
 
   return (
     <div>
-      {currentIndex}
-    </div>
+            {/* Render your buffer data */}
+            {orders.buffer.map((item, index) => item && (
+                <div key={index}>
+                    {/* Render your item details */}
+                    <p>Price: {item.price}, ID: {item.id}</p>
+                </div>
+            ))}
+        </div>
   )
 }
 
