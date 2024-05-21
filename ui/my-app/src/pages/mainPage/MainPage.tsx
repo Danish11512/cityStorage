@@ -5,23 +5,22 @@ import { useEffect, useState } from 'react'
 const MainPage = (rawOrders: Order[]): JSX.Element => {
     const [parsedOrders, setParsedOrders] = useState<Map<String, Order>>(new Map([]))
 
-    console.log(parsedOrders)
+    // console.log(parsedOrders)
 
     const addOrders = (data: Order[]) => {
+        console.log(data)
 
-        data = JSON.parse(data)
+        // const newOrders = new Map<String, Order>([]
 
-        const newOrders = new Map<String, Order>([]
-
-        )
-        data.forEach(i => {
-            newOrders.set(i.id, i)
-        })
+        // )
+        // data.forEach(i => {
+        //     newOrders.set(i.id, i)
+        // })
         
-        parsedOrders.forEach(i => {
-            newOrders.set(i.id, i)
-        })
-        setParsedOrders(new Map(newOrders))
+        // parsedOrders.forEach(i => {
+        //     newOrders.set(i.id, i)
+        // })
+        // setParsedOrders(new Map(newOrders))
     }
     
 
