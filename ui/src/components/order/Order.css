@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #bcbaba;
+    border-radius: 15px;
+  }
+
+  .cust__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .order__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-weight: 500;
+  }
+
+  .food__item{
+    font-weight: 600;
+
+  }
+
+  .status__cooked {
+    color: #040273;
+    
+  }
+
+  .status__driver__recieved {
+    color: #945906;
+  }
+
+  .status__delivered {
+    color: #109132;
+  }
+
+  .status__cancelled {
+    color: #7d1606;
+  }

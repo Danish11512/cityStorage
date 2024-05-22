@@ -27,7 +27,6 @@ export const orderReducer = (state, newOrders) => {
             }
 
             priceMap.get(price).add(currentIndex)
-            console.log(priceMap)
             currentIndex = (currentIndex + 1) % size
         }
     })

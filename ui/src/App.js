@@ -2,14 +2,15 @@ import { useContext, useEffect } from 'react'
 import './App.css'
 import { SocketContext } from 'components/socketContext/SocketContext'
 import { DataContext } from 'components/dataContext/DataContext'
+import OrderList from 'orderList/OrderList'
 
 function App() {
   const socket = useContext(SocketContext)
   const {orders, updateOrders} = useContext(DataContext)
-  // console.log(orders.priceMap)
 
   useEffect(() => {
     socket.on('order_event', (data) => {updateOrders(data)})
+    console.log('ran')
 
     return () => {
       socket.off('order_event', (data) => {updateOrders(data)})
@@ -17,14 +18,24 @@ function App() {
   }, [socket, updateOrders])
 
 
-  return (
-    <div>
-            {orders.orderBuffer.map((item, index) => item && (
+
+{/* {orders.orderBuffer.map((order, index) => order && (
                 <div key={index}>
-                    <p>ID: {item.id} EVENT: {item.event_name}</p>
+                    <Order orderObj={order}/>
                 </div>
-            ))}
+            ))} */}
+
+  return (
+    <div className='container'>
+      <div className='title__container'>
+        <div className='title'>
+          Order 'em Up!
         </div>
+      </div>
+      <div className='orders__container'>
+        <OrderList orders={orders.orderBuffer} priceMap={orders.priceMap}/>
+      </div>
+    </div>
   )
 }
 
