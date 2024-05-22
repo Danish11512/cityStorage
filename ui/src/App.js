@@ -18,13 +18,6 @@ function App() {
   }, [socket, updateOrders])
 
 
-
-{/* {orders.orderBuffer.map((order, index) => order && (
-                <div key={index}>
-                    <Order orderObj={order}/>
-                </div>
-            ))} */}
-
   return (
     <div className='container'>
       <div className='title__container'>
@@ -32,7 +25,7 @@ function App() {
           Order 'em Up!
         </div>
       </div>
-      <div className='orders__container'>
+      <div className='orders__section'>
         <OrderList orders={orders.orderBuffer} priceMap={orders.priceMap}/>
       </div>
     </div>

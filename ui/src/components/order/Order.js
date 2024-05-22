@@ -17,8 +17,23 @@ const Order = ({orderObj}) => {
         }
     }
 
+    const borderColor = (status) => {
+        switch (status) {
+            case 'COOKED':
+                return 'border__cooked'
+            case 'DRIVER_RECEIVED':
+                return 'border__driver__recieved'
+            case 'DELIVERED':
+                return 'border__delivered'
+            case 'CANCELLED':
+                return 'border__cancelled'
+            default:
+                return 'border__normal'
+        }
+    }
+
     return (
-        <div className='container'>
+        <div className={`order__container ${borderColor(orderObj.event_name)}`}>
             <div className='cust__info'>
                 <div>{orderObj.customer}</div>
                 <div>{orderObj.destination}</div>

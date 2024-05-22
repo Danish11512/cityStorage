@@ -1,0 +1,30 @@
+.order__list__container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+
+
+.input__container {
+    height: 15%;
+    display: flex;
+    justify-content: end;
+  }
+  
+  .input__container > input {
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+  }
+  
+  .orders__container {
+    height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+  }
+  

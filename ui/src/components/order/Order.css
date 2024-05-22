@@ -1,10 +1,32 @@
-.container {
+.order__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border: 1px solid #bcbaba;
     border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .border__normal {
+    border: 1px solid #e4e1e1;
+  }
+
+  .border__cooked {
+    border: 1px solid #040273;
+    
+  }
+
+  .border__driver__recieved {
+    border: 1px solid #945906;
+  }
+
+  .border__delivered {
+    border: 1px solid #109132;
+  }
+
+  .border__cancelled {
+    border: 1px solid #7d1606;
   }
 
   .cust__info {
