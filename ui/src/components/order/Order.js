@@ -8,7 +8,6 @@ const Order = ({orderObj}) => {
             destination: orderObj.destination,
             item: orderObj.item, 
             price: orderObj.price,
-            time: orderObj.sent_at_second
         }),
       [orderObj]
     )
@@ -55,7 +54,7 @@ const Order = ({orderObj}) => {
                 <div className={orderColor(orderObj.event_name)}>
                     {orderObj.event_name}
                 </div>
-                <div className='order__time'>Ordered at: {orderValues.time}</div>
+                <div className='order__time'>Ordered at: {orderObj.sent_at_second}</div>
             </div>
         </div>
     )

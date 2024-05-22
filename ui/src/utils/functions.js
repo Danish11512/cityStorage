@@ -33,3 +33,9 @@ export const orderReducer = (state, newOrders) => {
 
     return { orderBuffer, priceMap, idMap, currentIndex, size }
 }
+
+export const filterOrders = (orders) => {
+    const newOrders = orders
+
+    return newOrders
+}
