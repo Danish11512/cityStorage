@@ -1,18 +1,29 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './OrderList.css'
 import Order from 'components/order/Order'
+import { useDebouncedCallback } from 'use-debounce'
+import { getOrders } from 'utils/functions'
 
 const OrderList = ({orders, priceMap}) => {
-    const [searchValue, setSearchValue] = useState()
+    const [searchValue, setSearchValue] = useState('')
+    const [filteredOrders, setFilteredOrders] = useState(orders)
     const [showCount, setShowCount] = useState(false)
 
-    const handleOnChange = (e) => {
-        const value = e.target.value
-
-        if (typeof value === 'number') {
-            setSearchValue(Number(value))
+    const filterOrders = useDebouncedCallback((search) => {
+        if(typeof search !== 'number'){
+            filteredOrders(orders)
+        }else {
+            const newOrders = getOrders(orders, priceMap, searchValue)
+            setFilteredOrders(newOrders)
         }
-    }
+    }, 500)
+
+
+    const handleOnChange = useCallback((e) => {
+        const value = e.target.value
+        setSearchValue(value)
+        filterOrders(value)
+    }, [filterOrders])
     
 
 
@@ -27,7 +38,7 @@ const OrderList = ({orders, priceMap}) => {
                     <div className='search__count'></div>}
             </div>
             <div className='orders__container'>
-                {orders.slice().reverse().map((order, index) => order && (
+                {filteredOrders.slice().reverse().map((order, index) => order && (
                     <div key={index}>
                         <Order orderObj={order}/>
                     </div>

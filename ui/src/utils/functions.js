@@ -34,8 +34,10 @@ export const orderReducer = (state, newOrders) => {
     return { orderBuffer, priceMap, idMap, currentIndex, size }
 }
 
-export const filterOrders = (orders) => {
-    const newOrders = orders
+export const getOrders = (orders, priceMap, searchValue) => {
+    const indeces = priceMap.get(searchValue)
 
-    return newOrders
+
+
+    
 }

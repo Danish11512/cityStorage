@@ -2,15 +2,7 @@ import { useMemo } from 'react'
 import './Order.css'
 
 const Order = ({orderObj}) => {
-    const orderValues = useMemo(() => (
-        {
-            customer: orderObj.customer,
-            destination: orderObj.destination,
-            item: orderObj.item, 
-            price: orderObj.price,
-        }),
-      [orderObj]
-    )
+    const orderValues = useMemo(() => orderObj, [orderObj])
 
     const orderColor = (status) => {
         switch (status) {
@@ -43,7 +35,7 @@ const Order = ({orderObj}) => {
     }
 
     return (
-        <div className={`order__container ${borderColor(orderObj.event_name)}`}>
+        <div className={`order__container ${borderColor(orderValues.event_name)}`}>
             <div className='cust__info'>
                 <div>{orderValues.customer}</div>
                 <div>{orderValues.destination}</div>
@@ -51,10 +43,10 @@ const Order = ({orderObj}) => {
                 <div className='food__item'>{orderValues.item}</div>
             </div>
             <div className='order__info'>
-                <div className={orderColor(orderObj.event_name)}>
-                    {orderObj.event_name}
+                <div className={orderColor(orderValues.event_name)}>
+                    {orderValues.event_name}
                 </div>
-                <div className='order__time'>Ordered at: {orderObj.sent_at_second}</div>
+                <div className='order__time'>Ordered at: {orderValues.sent_at_second}</div>
             </div>
         </div>
     )
