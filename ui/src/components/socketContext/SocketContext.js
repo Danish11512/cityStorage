@@ -1,11 +1,10 @@
 import { createContext, useEffect } from "react"
-import { SOCKETURL } from 'utils/constants' 
-import io from 'socket.io-client'
+import { socket } from 'utils/constants' 
+
 
 export const SocketContext = createContext(null)
 
 const SocketContextProvider = ({children}) => {
-    const socket = io(SOCKETURL);
 
     useEffect(() => {
         socket.connect()
