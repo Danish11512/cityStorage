@@ -9,9 +9,7 @@ const OrderList = ({orders, priceMap}) => {
     const [filteredOrders, setFilteredOrders] = useState(orders)
     const [showCount, setShowCount] = useState(false)
     const debouncer = useDebouncedCallback((value) => {setSearchValue(value)}, 100)
-    console.log(priceMap)
-
-
+    
     const handleOnChange = (e) => {
         const value = e.target.value
         debouncer(value)
