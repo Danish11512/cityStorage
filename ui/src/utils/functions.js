@@ -2,7 +2,8 @@ export const orderReducer = (state, newOrders) => {
     let { orderBuffer, priceMap, idMap, currentIndex, size } = state
     
     newOrders.forEach(item => {
-        const { price, id } = item
+        const { price: priceString, id } = item
+        const price = parseInt(priceString)
 
         if (idMap.has(id)) {
             orderBuffer[idMap.get(id)] = item
@@ -35,9 +36,13 @@ export const orderReducer = (state, newOrders) => {
 }
 
 export const getOrders = (orders, priceMap, searchValue) => {
-    const indeces = priceMap.get(searchValue)
+    if(priceMap.has(searchValue)){
+        console.log('made it')
+        const indeces = Array.from(priceMap.get(searchValue))
+        console.log('indeces', indeces)
+        const filteredOrders = indeces.map(index => orders[index])
+        return filteredOrders
+    }
 
-
-
-    
+    return orders
 }
